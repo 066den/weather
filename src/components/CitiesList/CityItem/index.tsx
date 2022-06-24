@@ -24,6 +24,7 @@ import { weatherApi } from '../../../services/WeatherService';
 import { useAppDispatch } from '../../../hooks/redux';
 import { citySlice } from '../../../store/reducers/cities/CitySlice';
 import { useNavigate } from 'react-router-dom';
+import { apiUrl } from '../../../constants/apiUrl';
 
 interface CityItemProps {
 	city: ICity;
@@ -88,7 +89,7 @@ const CityItem: FC<CityItemProps> = ({ city }) => {
 									<>
 										<img
 											alt={data?.weather[0].main}
-											src={`http://openweathermap.org/img/wn/${data?.weather[0].icon}@2x.png`}
+											src={`${apiUrl.IMG_URL}${data?.weather[0].icon}@2x.png`}
 										/>
 										{Math.floor(data?.main.temp)}°C
 									</>

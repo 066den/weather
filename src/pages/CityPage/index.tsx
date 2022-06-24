@@ -18,6 +18,7 @@ import { useDate } from '../../hooks/useDate';
 import { citySlice } from '../../store/reducers/cities/CitySlice';
 import { ICity } from '../../types/ICity';
 import HourlyItem from '../../components/HourlyItem';
+import { apiUrl } from '../../constants/apiUrl';
 
 const CityPage: FC = () => {
 	const dispatch = useAppDispatch();
@@ -120,7 +121,7 @@ const CityPage: FC = () => {
 						{data?.current.weather[0].icon && (
 							<img
 								alt={data?.current.weather[0].main}
-								src={`http://openweathermap.org/img/wn/${data?.current.weather[0].icon}@2x.png`}
+								src={`${apiUrl.IMG_URL}${data?.current.weather[0].icon}@2x.png`}
 							/>
 						)}
 					</Grid>
