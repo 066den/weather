@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import { Grid, Paper } from '@mui/material';
-import { ICurrentWeather } from '../../../types/IWeather';
-import { Box } from '@mui/system';
+import { Grid, Paper, Box } from '@mui/material';
+
+import { ICurrentWeather } from '../../types/IWeather';
 
 interface IRange {
 	min: number;
