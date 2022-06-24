@@ -6,15 +6,15 @@ import NotFound from '../../pages/NotFound';
 import AppLayout from '../AppLayout';
 
 const AppRouter: FC = () => {
-	return (
-		<AppLayout>
-			<Routes>
-				<Route index element={<CitiesPage />} />
-				<Route path='/:name-:id' element={<CityPage />} />
-				<Route path='*' element={<NotFound />} />
-			</Routes>
-		</AppLayout>
-	);
+  return (
+    <AppLayout>
+      <Routes>
+        <Route index element={<CitiesPage />} />
+        <Route path='/:name-:id' element={<CityPage />} />
+        <Route path='*' element={<NotFound />} />
+      </Routes>
+    </AppLayout>
+  );
 };
 
 export default AppRouter;

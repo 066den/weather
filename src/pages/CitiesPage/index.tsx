@@ -5,14 +5,14 @@ import { citySlice } from '../../store/reducers/cities/CitySlice';
 import { ICity } from '../../types/ICity';
 
 const CitiesPage: FC = () => {
-	const dispatch = useDispatch();
-	const { addCities } = citySlice.actions;
-	useEffect(() => {
-		dispatch(
-			addCities(JSON.parse(localStorage.getItem('cities') || '[]') as ICity[])
-		);
-	}, []);
-	return <CitiesList />;
+  const dispatch = useDispatch();
+  const { addCities } = citySlice.actions;
+  useEffect(() => {
+    dispatch(
+      addCities(JSON.parse(localStorage.getItem('cities') || '[]') as ICity[])
+    );
+  }, []);
+  return <CitiesList />;
 };
 
 export default CitiesPage;

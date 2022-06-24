@@ -10,16 +10,16 @@ import { setupStore } from '../../store';
 const store = setupStore();
 
 const App: FC = () => {
-	return (
-		<Provider store={store}>
-			<ThemeProvider theme={theme}>
-				<BrowserRouter basename={process.env.PUBLIC_URL || '/'}>
-					<CssBaseline />
-					<AppRouter />
-				</BrowserRouter>
-			</ThemeProvider>
-		</Provider>
-	);
+  return (
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter basename={process.env.PUBLIC_URL || '/'}>
+          <CssBaseline />
+          <AppRouter />
+        </BrowserRouter>
+      </ThemeProvider>
+    </Provider>
+  );
 };
 
 export default App;
