@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import {
 	Button,
 	Divider,
@@ -17,7 +17,7 @@ import { citySlice } from '../../store/reducers/cities/CitySlice';
 
 const SearchCity: FC = () => {
 	const dispatch = useAppDispatch();
-	const { addCity, addCities } = citySlice.actions;
+	const { addCity } = citySlice.actions;
 	const { cities } = useAppSelector(state => state.city);
 
 	const [search, setSearch] = useState('');
@@ -61,12 +61,6 @@ const SearchCity: FC = () => {
 			fetchCities(search);
 		}
 	};
-
-	useEffect(() => {
-		dispatch(
-			addCities(JSON.parse(localStorage.getItem('cities') || '[]') as ICity[])
-		);
-	}, []);
 
 	return (
 		<Box sx={{ position: 'relative' }}>

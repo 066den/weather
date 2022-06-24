@@ -5,18 +5,18 @@ import {
 	Button,
 	Grid,
 	IconButton,
-	Menu,
 	Toolbar,
 	Typography,
 } from '@mui/material';
 import { Box } from '@mui/system';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchCity from '../SearchCity';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const NavBar: FC = () => {
 	const navigate = useNavigate();
-	console.log(navigate);
+	const location = useLocation();
+
 	return (
 		<Box>
 			<AppBar position='static'>
@@ -53,7 +53,7 @@ const NavBar: FC = () => {
 							xs={6}
 							sx={{ display: 'flex', justifyContent: 'center' }}
 						>
-							<SearchCity />
+							{location.pathname === '/' && <SearchCity />}
 						</Grid>
 						<Grid item xs></Grid>
 					</Grid>

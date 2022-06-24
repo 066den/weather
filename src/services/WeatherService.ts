@@ -20,10 +20,11 @@ export const weatherApi = createApi({
 		}),
 		fetchWeather: build.query<IWeather, ICoords>({
 			query: coords => ({
-				url: '/',
+				url: apiUrl.WEATHER_API_URL,
 				params: {
 					lat: coords.lat,
 					lon: coords.lon,
+					exclude: 'minutely',
 					units: 'metric',
 					appid: apiUrl.API_KEY,
 				},

@@ -8,6 +8,6 @@ export interface ICity {
 }
 
 export interface ICoords {
-	lat: number;
-	lon: number;
+	lat: number | undefined;
+	lon: number | undefined;
 }

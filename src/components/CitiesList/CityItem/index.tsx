@@ -33,13 +33,16 @@ const CityItem: FC<CityItemProps> = ({ city }) => {
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 	const { deleteCity } = citySlice.actions;
-	const { date, time } = useDate();
+
 	const { id, name, state, country, lon, lat } = city;
 
-	const { data, refetch, isLoading } = weatherApi.useFetchShortWeatherQuery({
-		lon,
-		lat,
-	});
+	const { data, refetch, isLoading, fulfilledTimeStamp } =
+		weatherApi.useFetchShortWeatherQuery({
+			lon,
+			lat,
+		});
+
+	const { date, time } = useDate(fulfilledTimeStamp);
 
 	const handleDelete = () => {
 		dispatch(deleteCity(id));

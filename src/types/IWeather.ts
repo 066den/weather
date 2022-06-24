@@ -3,6 +3,12 @@ export interface ICurrentWeather {
 	feels_like: number | any;
 	pressure: number;
 	humidity: number;
+	wind_speed: number;
+	wind_deg: number;
+	wind_gust: number;
+	visibility: number | any;
+	dt: number;
+	weather: IDescription[];
 }
 
 export interface IDescription {
@@ -20,6 +26,7 @@ export interface IWind {
 
 export interface IWeather {
 	current: ICurrentWeather;
+	hourly: ICurrentWeather[];
 }
 
 export interface IShortWeather {
