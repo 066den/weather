@@ -13,16 +13,21 @@ interface HourlyItemProps {
   range: IRange;
 }
 
+const BOX_SX = { height: 100, my: '15px', position: 'relative' };
+
 const HourlyItem: FC<HourlyItemProps> = props => {
-  const { temp } = props.weather;
-  const { min, max } = props.range;
+  const {
+    weather: { temp },
+    range: { min, max },
+  } = props;
+
   const indent = Math.floor(((temp - min) * 100) / (max - min));
 
   return (
     <Grid item xs={1}>
       <Grid container direction='column' alignItems='center'>
         <Box>{props.index * 2}&deg;&deg;</Box>
-        <Box sx={{ height: 100, my: '15px', position: 'relative' }}>
+        <Box sx={BOX_SX}>
           <Paper
             sx={{
               px: 1,
@@ -35,8 +40,6 @@ const HourlyItem: FC<HourlyItemProps> = props => {
             {Math.floor(temp)}°C
           </Paper>
         </Box>
-
-        <Box></Box>
       </Grid>
     </Grid>
   );

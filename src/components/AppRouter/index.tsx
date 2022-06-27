@@ -11,7 +11,7 @@ const AppRouter: FC = () => {
       <Routes>
         <Route index element={<CitiesPage />} />
         <Route path='/:name-:id' element={<CityPage />} />
-        <Route path='*' element={<NotFound />} />
+        <Route element={<NotFound />} />
       </Routes>
     </AppLayout>
   );

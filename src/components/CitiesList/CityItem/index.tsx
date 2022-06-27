@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import {
   Box,
   Button,
@@ -30,6 +30,12 @@ interface CityItemProps {
   city: ICity;
 }
 
+const CART_HEADER_SX = {
+  bgcolor: 'primary.main',
+  color: '#fff',
+  flexDirection: 'row-reverse',
+};
+
 const CityItem: FC<CityItemProps> = ({ city }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -45,20 +51,20 @@ const CityItem: FC<CityItemProps> = ({ city }) => {
 
   const { date, time } = useDate(fulfilledTimeStamp);
 
-  const handleDelete = () => {
+  const handleRefetchClick = useCallback(() => refetch(), []);
+
+  const handleDeleteClick = useCallback(() => handleDelete(), []);
+
+  const handleDelete = useCallback(() => {
     dispatch(deleteCity(id));
-  };
+  }, [id]);
 
   return (
     <Grid item xs={4}>
       <Card>
         <CardActionArea onClick={() => navigate(`/${name}-${id}`)}>
           <CardHeader
-            sx={{
-              bgcolor: 'primary.main',
-              color: '#fff',
-              flexDirection: 'row-reverse',
-            }}
+            sx={CART_HEADER_SX}
             title={
               isLoading ? (
                 <>
@@ -148,11 +154,11 @@ const CityItem: FC<CityItemProps> = ({ city }) => {
 
         <CardActions sx={{ justifyContent: 'space-between' }}>
           <Tooltip title='Обновить данные о погоде сейчас'>
-            <IconButton onClick={() => refetch()}>
+            <IconButton onClick={handleRefetchClick}>
               <AutorenewIcon />
             </IconButton>
           </Tooltip>
-          <Button variant='outlined' onClick={() => handleDelete()}>
+          <Button variant='outlined' onClick={handleDeleteClick}>
             Delete
           </Button>
         </CardActions>

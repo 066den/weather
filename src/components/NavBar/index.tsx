@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 
 import {
   AppBar,
@@ -16,6 +16,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 const NavBar: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const handleNavigateClick = useCallback(() => {
+    navigate('/');
+  }, []);
 
   return (
     <Box>
@@ -36,13 +40,13 @@ const NavBar: FC = () => {
                 variant='h5'
                 component='span'
                 sx={{ cursor: 'pointer' }}
-                onClick={() => navigate('/')}
+                onClick={handleNavigateClick}
               >
                 Weather
               </Typography>
               <Box sx={{ ml: 2 }}></Box>
               <Button
-                onClick={() => navigate('/')}
+                onClick={handleNavigateClick}
                 sx={{ my: 1, color: 'white', display: 'block' }}
               >
                 Home

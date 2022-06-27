@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import { ListItem, ListItemButton, ListItemText } from '@mui/material';
 
 import { apiUrl } from '../../../constants/apiUrl';
@@ -12,14 +12,13 @@ interface SearchCityItemProps {
 const SearchCityItem: FC<SearchCityItemProps> = ({ city, handleAddCity }) => {
   const { name, lat, lon, country, state } = city;
 
-  const handleClick = () => {
-    console.log();
+  const handleClick = useCallback(() => {
     handleAddCity({ ...city, id: Date.now() });
-  };
+  }, []);
 
   return (
     <ListItem dense>
-      <ListItemButton onClick={() => handleClick()}>
+      <ListItemButton onClick={handleClick}>
         <ListItemText
           sx={{
             display: 'flex',

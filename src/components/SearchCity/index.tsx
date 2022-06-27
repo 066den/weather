@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import {
   Button,
   Divider,
@@ -24,7 +24,7 @@ const SearchCity: FC = () => {
   const [error, setError] = useState('');
   const [foundCities, setFoundCities] = useState<ICity[]>([]);
 
-  const fetchCities = async (name: string) => {
+  const fetchCities = useCallback(async (name: string) => {
     setError('');
     setFoundCities([]);
     try {
@@ -37,9 +37,9 @@ const SearchCity: FC = () => {
     } catch (e) {
       setError('The request failed');
     }
-  };
+  }, []);
 
-  const handleAddCity = (city: ICity) => {
+  const handleAddCity = useCallback((city: ICity) => {
     setFoundCities([]);
     setSearch('');
     const index = cities.findIndex(el => {
@@ -50,17 +50,20 @@ const SearchCity: FC = () => {
     } else {
       setError('The request failed');
     }
-  };
+  }, []);
 
-  const handlerSearch = () => {
+  const handlerSearch = useCallback(() => {
     fetchCities(search);
-  };
+  }, [search]);
 
-  const handleKey = (event: React.KeyboardEvent<HTMLElement>) => {
-    if (event.key === 'Enter') {
-      fetchCities(search);
-    }
-  };
+  const handleKey = useCallback(
+    (event: React.KeyboardEvent<HTMLElement>) => {
+      if (event.key === 'Enter') {
+        fetchCities(search);
+      }
+    },
+    [search]
+  );
 
   return (
     <Box sx={{ position: 'relative' }}>
@@ -68,7 +71,7 @@ const SearchCity: FC = () => {
         sx={{
           p: '2px 4px',
           display: 'flex',
-          alignItems: '43uyhjg',
+          alignItems: 'center',
           width: 500,
         }}
       >

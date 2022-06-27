@@ -5,7 +5,7 @@ import city from './reducers/cities/CitySlice';
 const syncWithLocalStorage = (store: any) => (next: any) => (action: any) => {
   const result = next(action);
 
-  if (action.type === 'city/addCity') {
+  if (action.type === 'city/addCity' || action.type === 'city/deleteCity') {
     localStorage.setItem(
       'cities',
       JSON.stringify(store.getState().city.cities)

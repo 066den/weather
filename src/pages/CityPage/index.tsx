@@ -1,4 +1,5 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useMemo } from 'react';
+import { useParams } from 'react-router-dom';
 import {
   Box,
   Grid,
@@ -10,19 +11,13 @@ import {
 } from '@mui/material';
 import NavigationIcon from '@mui/icons-material/Navigation';
 
-import { useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useAppSelector } from '../../hooks/redux';
 import { weatherApi } from '../../services/WeatherService';
 import { useDate } from '../../hooks/useDate';
-
-import { citySlice } from '../../store/reducers/cities/CitySlice';
-import { ICity } from '../../types/ICity';
 import HourlyItem from '../../components/HourlyItem';
 import { apiUrl } from '../../constants/apiUrl';
 
 const CityPage: FC = () => {
-  const dispatch = useAppDispatch();
-  const { addCities } = citySlice.actions;
   const { id } = useParams();
   const { cities } = useAppSelector(state => state.city);
   const city = cities.find(el => el.id === Number(id));
@@ -35,26 +30,22 @@ const CityPage: FC = () => {
 
   const { date, time } = useDate(fulfilledTimeStamp);
 
-  const hourlyToday = data?.hourly.filter(
-    (item, idx) => idx % 2 === 0 && idx < 24
-  );
+  const hourlyToday = useMemo(() => {
+    return data?.hourly.filter((item, idx) => idx % 2 === 0 && idx < 24);
+  }, [data?.hourly]);
 
-  const range = {
-    max: Math.max.apply(
-      Math,
-      hourlyToday?.map(e => e.temp)
-    ),
-    min: Math.min.apply(
-      Math,
-      hourlyToday?.map(e => e.temp)
-    ),
-  };
-
-  useEffect(() => {
-    dispatch(
-      addCities(JSON.parse(localStorage.getItem('cities') || '[]') as ICity[])
-    );
-  }, []);
+  const range = useMemo(() => {
+    return {
+      max: Math.max.apply(
+        Math,
+        hourlyToday?.map(e => e.temp)
+      ),
+      min: Math.min.apply(
+        Math,
+        hourlyToday?.map(e => e.temp)
+      ),
+    };
+  }, [hourlyToday]);
 
   return (
     <Box>
